@@ -72,8 +72,7 @@ The application can now be accessed at: https://nazimfs-rebtel.hopto.org/.
 ## Verification
 To verify the setup, I checked the following:
 
-- The SSL Labs score for the domain, which returned an A+ rating (as shown in the screenshot below):
-![SSL Labs Score](app-setup/SSL_Lab_Score.png)
+- The SSL Labs score for the domain, which returned an A+ rating (as shown in the image file `SSL_Lab_Score.png`)
 - I also performed a script injection test, which returned a 403 Forbidden response, confirming that the WAF is functioning properly:
 ```
 curl 'https://nazimfs-rebtel.hopto.org//?q="><script>alert(1)</script>'
