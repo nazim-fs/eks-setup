@@ -3,6 +3,7 @@
 This README documents the steps I took to set up the Rebtel web application using Kubernetes and NGINX Ingress Controller. 
 
 ## Folder Structure
+```
 .
 ├── app-config
 │   ├── Dockerfile
@@ -14,6 +15,7 @@ This README documents the steps I took to set up the Rebtel web application usin
     ├── nginx-ingress-controller-values.yaml
     ├── rebtel-web-app.yaml
     └── rebtel-web-ingress.yaml
+```
 
 
 ## Steps Taken for Setup
