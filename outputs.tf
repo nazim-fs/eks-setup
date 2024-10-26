@@ -13,9 +13,19 @@ output "cluster_security_group_id" {
   value       = module.eks.cluster_security_group_id
 }
 
+output "cluster_name" {
+  description = "EKS cluster name."
+  value       = module.eks.cluster_name
+}
+
 output "region" {
   description = "AWS region"
   value       = var.aws_region
+}
+
+output "aws_profile" {
+  description = "AWS profile"
+  value       = var.aws_profile
 }
 
 output "oidc_provider_arn" {
