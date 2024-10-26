@@ -1,0 +1,38 @@
+controller:
+  kind: DaemonSet
+  extraContainers:
+    - name: nginx-ingress-sidecar
+      image: busybox
+      command: ["/bin/sh", "-c", "while true; do ls /var/log/nginx/*.log; sleep 45; done"]
+      resources:
+        limits:
+          cpu: "0.2"
+          memory: "256Mi"
+        requests:
+          cpu: "0.1"
+          memory: "128Mi"
+      volumeMounts:
+        - name: nginx-ingress-logs
+          mountPath: /var/log/nginx
+
+  extraVolumeMounts:
+    - name: nginx-ingress-logs
+      mountPath: /var/log/nginx
+
+  extraVolumes:
+    - name: nginx-ingress-logs
+      emptyDir: {}
+
+  config:
+    enable-modsecurity: "true"
+    enable-owasp-modsecurity-crs: "true"
+    modsecurity-snippet: |
+      SecRuleEngine On
+      SecRequestBodyAccess On
+      SecAuditLogFormat JSON
+      SecResponseBodyAccess On
+      SecAuditEngine RelevantOnly
+      SecAuditLogParts ABIJDEFHZ
+      SecAuditLogType Serial
+      SecAuditLog /var/log/modsec_audit.log
+      SecRule REQUEST_URI|ARGS|QUERY_STRING \"@contains attack\" \"id:100001,phase:1,t:lowercase,deny,status:403,msg:\'Attack Detected\'\"
