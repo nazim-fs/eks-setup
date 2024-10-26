@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rebtel-web-ingress
+  namespace: rebtel-web-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+  - secretName: rebtel-web-tls
+    hosts:
+    - nazimfs-rebtel.hopto.org
+  rules:
+  - host: nazimfs-rebtel.hopto.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rebtel-web-service
+            port:
+              number: 80
