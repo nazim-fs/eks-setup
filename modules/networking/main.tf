@@ -2,9 +2,9 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.14.0"
 
-  name = "rebtel-${var.environment}-vpc"
-  cidr = var.vpc_cidr
-  azs  = data.aws_availability_zones.available.names
+  name                 = "rebtel-${var.environment}-vpc"
+  cidr                 = var.vpc_cidr
+  azs                  = data.aws_availability_zones.available.names
   private_subnets      = var.private_subnet_cidrs
   public_subnets       = var.public_subnet_cidrs
   enable_nat_gateway   = true
